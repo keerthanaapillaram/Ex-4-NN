@@ -1,8 +1,8 @@
 
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>ENTER YOUR NAME : P Keerthana</H3>
+<H3>ENTER YOUR REGISTER NO. : 212223240069 </H3>
 <H3>EX. NO.4</H3>
-<H3>DATE:</H3>
+<H3>DATE: 22-10-2025 </H3>
 <H1 ALIGN =CENTER>Implementation of MLP with Backpropagation for Multiclassification</H1>
 <H3>Aim:</H3>
 To implement a Multilayer Perceptron for Multi classification
@@ -116,11 +116,53 @@ Normalize our dataset.
 
 <H3>Program:</H3> 
 
-Insert your code here
+```
+import pandas as pd
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"
+
+names = ["Class", "Alcohol", "Malic_acid", "Ash", "Magnesium"]
+
+winedata = pd.read_csv(url, names=names, usecols=[0, 1, 2, 3, 5])
+
+print(winedata.head())
+
+x = winedata.iloc[:, 1:]   # features
+y = winedata["Class"]      # labels
+
+# Encode labels
+le = preprocessing.LabelEncoder()
+y_encoded = le.fit_transform(y)
+
+x_train, x_test, y_train, y_test = train_test_split(x, y_encoded, test_size=0.25, random_state=42)
+
+scaler = StandardScaler()
+scaler.fit(x_train)
+x_train = scaler.transform(x_train)
+x_test = scaler.transform(x_test)
+
+mlp = MLPClassifier(hidden_layer_sizes=(10,10,10), max_iter=1000, random_state=42)
+mlp.fit(x_train, y_train)
+
+predictions = mlp.predict(x_test)
+predicted_classes = le.inverse_transform(predictions)
+
+# Confusion matrix
+print(confusion_matrix(y_test, predictions))
+
+# Classification report with proper class labels
+print(classification_report(y_test, predictions, target_names=[f"Wine-Class-{c}" for c in le.classes_]))
+```
 
 <H3>Output:</H3>
 
-Show your results here
+<img width="927" height="403" alt="image" src="https://github.com/user-attachments/assets/0c4a5eb1-88a9-48fb-83cc-0c0ee1b6d059" />
+
 
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
