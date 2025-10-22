@@ -161,8 +161,7 @@ print(classification_report(y_test, predictions, target_names=[f"Wine-Class-{c}"
 
 <H3>Output:</H3>
 
-<img width="927" height="403" alt="image" src="https://github.com/user-attachments/assets/0c4a5eb1-88a9-48fb-83cc-0c0ee1b6d059" />
-
+<img width="739" height="377" alt="image" src="https://github.com/user-attachments/assets/5657b652-0a45-4d32-ad21-97abc9cb6b2d" />
 
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
